@@ -16,10 +16,18 @@ Credits to Enrico Zini for writing nodm and a LightDM configuration guide: https
 
 # Installation steps
 
-1. Install a Debian minimal OS into your host
+1. Install a Debian minimal OS into your host with the system utilities and SSH
 
-2. Set the IP address or hostname of your host into the `inventory` file
+2. Copy your SSH Key to the host.
 
-3. Set the password for the `stepmania` user inside the `stepmania_password` variable of the `inventory` file
+3. Set the IP address or hostname of your host into the `inventory` file
 
-4. Run the Ansible playbook: `ansible-playbook install.yaml`
+4. Set the password for the `stepmania` user inside the `stepmania_password` variable of the `inventory` file
+
+5. Find your gamepad usb port:
+```sh
+udevadm info -q all -n /dev/input/eventX
+```
+and set it in the `install_stepmania.yaml`
+
+6. Run the Ansible playbook: `ansible-playbook install.yaml`
