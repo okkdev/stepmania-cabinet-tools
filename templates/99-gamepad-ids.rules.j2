@@ -1,2 +1,2 @@
-SUBSYSTEM=="input", KERNELS=="{{dancepad_1_port}}", SYMLINK+="input/js0"
-SUBSYSTEM=="input", KERNELS=="{{dancepad_2_port}}", SYMLINK+="input/js1"
+SUBSYSTEM=="input", KERNELS=="{{dancepad_1_port}}", KERNEL=="js*", SYMLINK+="input/dance0"
+SUBSYSTEM=="input", KERNELS=="{{dancepad_2_port}}", KERNEL=="js*", SYMLINK+="input/dance1"

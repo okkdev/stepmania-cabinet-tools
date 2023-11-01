@@ -2,8 +2,8 @@
   hosts: all
   gather_facts: false
   vars:
-    dancepad_1_port: ""
-    dancepad_2_port: ""
+    dancepad_1_port: "[1-3]-2"
+    dancepad_2_port: "[1-3]-1"
     stepmania_release: itgmania-0-7-0
     stepmania_releases:
       itgmania-0-7-0:
@@ -58,17 +58,19 @@
     - name: Set Audio Device
       ansible.builtin.copy:
         src: ./files/.asoundrc
-        dest: /home/stepmania/.asoundrc
+        dest: /home/stepmania/
 
     - name: Copy Preferences
       ansible.builtin.copy:
         src: ./files/Save
-        dest: "{{ stepmania_releases[stepmania_release].user_data_dest }}/Save"
+        dest: "{{ stepmania_releases[stepmania_release].user_data_dest }}"
+        owner: stepmania
+        group: stepmania
 
     - name: Assign dance pad ids to joystick numbers
       ansible.builtin.template:
-        src: ./templates/99-gamepad-ids.rules.j2
-        dest: /etc/udev/rules.d/99-gamepad-ids.rules
+        src: ./templates/10-gamepad-ids.rules.j2
+        dest: /etc/udev/rules.d/10-gamepad-ids.rules
 
     #
     # Tasks to autoboot the game
